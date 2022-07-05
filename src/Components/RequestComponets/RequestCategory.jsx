@@ -91,16 +91,12 @@ const RequestCategory = () => {
                             </div>
                             <div className="col-lg-8">
                                 <form>
+                                    
+                                    <div className="form-group">
+                                        <label for="exampleInputPassword1"><h2>Category Name</h2></label>
+                                        <input type="text" className="form-control" name="category_name" placeholder="Category Name" onChange={onChangeHandler} />
+                                    </div>
 
-                                    <div className="form-group">
-                                        <label for="exampleInputPassword1"><h2>Category Name</h2></label>
-                                        <input type="text" className="form-control" name="category_name" placeholder="Category Name" onChange={onChangeHandler} />
-                                    </div>
-                                    {/*  */}
-                                    <div className="form-group">
-                                        <label for="exampleInputPassword1"><h2>Category Name</h2></label>
-                                        <input type="text" className="form-control" name="category_name" placeholder="Category Name" onChange={onChangeHandler} />
-                                    </div>
                                     <Stack spacing={2} sx={{ width: '100%' }} id="stack">
                                         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
                                         {/* Snackbar */}
