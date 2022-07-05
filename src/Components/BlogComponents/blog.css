@@ -1,0 +1,10 @@
+.blog{    
+    padding: 1rem;
+    border: 1px solid black;
+}
+.decripction{
+    text-align: justify;
+}
+.paddingtobot{
+    padding: 3rem 0;
+}
