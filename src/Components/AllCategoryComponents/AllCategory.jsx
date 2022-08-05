@@ -12,7 +12,7 @@ const AllCategory = () => {
     useEffect(() => {
         dispatch(loadCategoryes());
     }, []);
-    return (
+    return ( 
         <>
             <div className="portfolio-area pt-4 pb-4">
                 <div className="container">

@@ -9,4 +9,4 @@ const AllCategoryPanel = () => {
   )
 }
 
-export default AllCategoryPanel
+export default AllCategoryPanel 

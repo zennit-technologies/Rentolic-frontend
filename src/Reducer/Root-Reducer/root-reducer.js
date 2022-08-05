@@ -25,6 +25,7 @@ import aboutReducer from '../aboutReducer'
 import contactReducer from '../contactReducer'
 import ContactWebSiteReducer from '../ContactWebSiteReducer'
 import starsReducer from '../starsReducer'
+import subCategoryAdsReducer from '../subCategoryAdsReducer'
 
 const rootReducer = combineReducers({
     categoryData: categoryReducer,
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
     ContactWebSiteData : ContactWebSiteReducer,
     statesData : statesReducer,
     starsData : starsReducer,
+    subCategoryAdsData : subCategoryAdsReducer,
 });
 
 

@@ -45,7 +45,7 @@ const SignIn = () => {
     const { setUpRecaptha } = useUserAuth();
     const [flag, setFlag] = useState(false);
     const [flag2, setFlag2] = useState(false);
-    const [user, setUser] = useState({ id: "", fullName: "", login: "", phone: "", token: "" })
+    const [user, setUser] = useState({ id: "", fullName: "", login: "", phone: "", token: "", tnc: false })
 
 
     const [sign, setSign] = useState(1);
@@ -57,8 +57,12 @@ const SignIn = () => {
         email: "",
         phone: "",
         password: "",
-        // terms: "",
+        tnc: "",
     })
+
+    const {
+        tnc,
+    } = state;
 
     const navigate = useNavigate();
 
@@ -151,6 +155,10 @@ const SignIn = () => {
         else if (!confirm) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Confirm Password !", });
+        }
+        else if (!tnc) {
+            setOpen(true);
+            setAlert({ sev: "error", content: "Please Agree to Terms and Conditions", });
         }
         else if (confirm !== state.password) {
             setOpen(true);
@@ -362,18 +370,20 @@ const SignIn = () => {
                                                                         onChange={(e) => setConfirm(e.target.value)}
                                                                     />
                                                                     {/* <!-- <span className="fa fa-eye-slash pwd-toggle"></span> --> */}
-                                                                    <div id="recaptcha-container"></div>
-
+                                                                    <div id="recaptcha-container">
+                                                                        <input type="checkbox" name="tnc" onChange={onChangeHandler} />
+                                                                        Agree to <Link to="/">Terms and Conditions</Link>
+                                                                    </div>
 
                                                                     <div className="form-group">
-                                                                        <Stack spacing={2} sx={{ width: '100%' }} id="stack">
+                                                                        <Stack spacing={2} sx={{ width: '100%' }} id="stack" >
                                                                             <button to=""
                                                                                 className="btn btn-lg btn-primary btn-block"
                                                                                 type="button"
                                                                                 onClick={handleRegister}
                                                                             >SIGN UP</button>
                                                                             {/* Snackbar */}
-                                                                            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
+                                                                            <Snackbar style={{ marginTop: "10rem" }} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
                                                                                 <Alert onClose={handleClose} severity={alert.sev} sx={{ width: '100%' }}>
                                                                                     {alert.content}
                                                                                 </Alert>

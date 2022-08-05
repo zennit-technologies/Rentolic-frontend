@@ -24,8 +24,8 @@ const ViewAll = () => {
     return (
         <>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" class="btn-new btn bt-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                View categories
+            <button type="button" class="btn-new btn bt-primary view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa fa-bars" aria-hidden="true"></i> View categories
             </button>
 
             {/* <!-- Modal --> */}
@@ -46,7 +46,7 @@ const ViewAll = () => {
                                 {categoryes &&
                                     categoryes.filter((val) => val.status === 1).map((category, i) => {
                                         return (
-                                            <ul>
+                                            <ul className='viewall-ul'>
                                                 <li className="nav-item nav-item-new">
                                                     <a className="nav-link nav-link-a d-flex " style={{ width: "100%" }} data-toggle="collapse" aria-expanded="false" aria-controls="ui-basic" onClick={() => { setAccord(+i) }}>
                                                         <span className="menu-title">{category.category_name}</span>
@@ -59,7 +59,7 @@ const ViewAll = () => {
                                                             return <div className="collapse" id="ui-basic" style={{ display: accord === +i ? 'block' : 'none' }}>
                                                                 <ul className="nav flex-column sub-menu">
                                                                     <li className="nav-item">
-                                                                        <Link className="nav-link nav-link-a" style={{ width: "100%" }} to={`/category/${val.name}/${val.id}`}>
+                                                                        <Link className="nav-link nav-link-a" style={{ width: "100%" }} to={`/sub-category/${val.name}/${val.id}`}>
                                                                             <span className="menu-title">{val.name}</span>
                                                                         </Link>
                                                                     </li>

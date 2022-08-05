@@ -5,7 +5,7 @@ const Intro = () => {
         <>
 
             {/* <!-- intro-area start --> */}
-            <div className="intro-area pt-4 pb-4">
+            {/* <div className="intro-area pt-4 pb-4">
                 <div className="container">
                     <div className="row"> 
                         <div className="col-xl-12">
@@ -17,7 +17,7 @@ const Intro = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/* <!-- intro-area end --> */}
         </>
     )

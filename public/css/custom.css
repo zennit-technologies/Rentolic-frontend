@@ -1019,6 +1019,7 @@ fieldset input:focus {
 .username {
   font-size: 13px;
   margin: 0px;
+  text-transform: capitalize;
 }
 
 .otpButton {

@@ -292,6 +292,15 @@ const Specification = () => {
                                     </ul>
                                 </div>
 
+                                <span>
+                                    {filterProduct.length === 0 ? 
+                                    <h5>Phone Number </h5> 
+                                    : fullName !== null ? 
+                                    <h5>Phone Number : {`${filterProduct[0].seller_mobile}`}
+                                    </h5>: <h5></h5>
+                                    } 
+                                </span>
+
                                 <div className="Day-table mt-45">
                                     <table className="table table-bordered">
                                         <thead>
@@ -306,7 +315,9 @@ const Specification = () => {
                                         <tbody>
                                             <tr>
                                                 <td>₹{filterProduct.length === 0 ? <h2></h2> : filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100}</td>
+
                                                 <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100}</td>
+
                                                 <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100}</td>
 
                                                 <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100}</td>
@@ -324,11 +335,11 @@ const Specification = () => {
                                         </tbody>
                                     </table>
                                     {
-                                        filterProduct.length !== 0 && filterProduct[0].security_deposit && filterProduct[0].security_deposit!=='0'?<div className="delivery-heading pt-2 text-black">
-                                        <h4>
-                                            Security Deposit <p>₹ {filterProduct.length === 0 ? <h2>₹</h2> : filterProduct[0].security_deposit}</p>
-                                        </h4>
-                                    </div>:null}
+                                        filterProduct.length !== 0 && filterProduct[0].security_deposit && filterProduct[0].security_deposit !== '0' ? <div className="delivery-heading pt-2 text-black">
+                                            <h4>
+                                                Security Deposit <p>₹ {filterProduct.length === 0 ? <h2>₹</h2> : filterProduct[0].security_deposit}</p>
+                                            </h4>
+                                        </div> : null}
 
                                     {
                                         toggle === 1 ? <div className="specification pt-4  pb-4">

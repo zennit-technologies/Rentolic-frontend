@@ -9,11 +9,13 @@ import { loadProducts } from '../../../Actions/productAction';
 import Rateing from '../../Common/Rating/Rateing';
 import { Rating } from '@mui/material';
 import { addProductClick } from '../../../Actions/productClickAction';
+import { loadAds } from '../../../Actions/adsAction';
 
 const SubCategory = () => {
     // LOAD ACTIONS
     const { category_id } = useParams();
     let dispatch = useDispatch();
+
     const { subCategoryes } = useSelector(state => state.subCategoryData);
     const { category } = useSelector(state => state.categoryData);
 
@@ -29,18 +31,41 @@ const SubCategory = () => {
     }, []);
     // LOAD ACTIONS ENDS
 
+    const { ads } = useSelector(state => state.adData);
+    useEffect(() => {
+        dispatch(loadAds());
+        dispatch(getSingleCategory(category_id));
+    }, [category_id]);
+
     const filterSubCat = products.filter((curr) => {
         return curr.category_id == category_id;
-    })
+    }) 
     // console.log(filterSubCat)
+
+    // CHECKING THE SAME ID IN CATEGORY AND ADS
+    const filterAdCat = ads.filter((curr) => {
+        return curr.subtitle == category_id;
+    })
     // LOAD ACTIONS ENDS 
     return (
         <>
-            {/* SUB CATEGORY BANNER */}
-            <Carousel showThumbs={false}>
-                <div>
-                    <img src={`${process.env.REACT_APP_IPURL}${category.icon}`} />
-                </div>
+            {/* SUB CATEGORY BANNER */} 
+            <Carousel
+                showThumbs={false}
+                infiniteLoop
+                // transitionTime={6000}
+                autoPlay
+            >
+                {filterAdCat &&
+                    filterAdCat.map((state, i) => {
+                        return (
+                            <a href={state.buttonText}>
+                                <div className='maxHeight' style={{ height: "400px" }} >
+                                    <img className='maxHeight' style={{ height: "400px" }} src={`${process.env.REACT_APP_IPURL}${state.icon}`} />
+                                </div>
+                            </a>
+                        );
+                    })}
             </Carousel>
 
             {/* <!-- basic-blog-area --> */}
@@ -53,8 +78,8 @@ const SubCategory = () => {
                             filterSubCat.map((products, i) => {
                                 return (
                                     <div className="col-lg-3 col-md-6 blog-item  mb-4" >
-                                        <Link to={`/product/${products.product_name}/${products.id}`} 
-                                        onClick={() => dispatch(addProductClick([{ 'product_id': products.id }]))}>
+                                        <Link to={`/product/${products.product_name}/${products.id}`}
+                                            onClick={() => dispatch(addProductClick([{ 'product_id': products.id }]))}>
                                             <div className="portfolio-thumb">
                                                 <img src={`${process.env.REACT_APP_IPURL}${products.images}`} alt="" />
                                                 <div className="btn-furniture weekly-product">
@@ -65,15 +90,12 @@ const SubCategory = () => {
                                             </div>
                                         </Link>
                                     </div>
-
-
                                 );
                             })}
                     </div>
                 </div>
             </div>
             {/* <!-- basic-blog-area end --> */}
-
         </>
     )
 }

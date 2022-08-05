@@ -9,15 +9,20 @@ import { addProductClick } from '../../../Actions/productClickAction';
 import Rateing from '../../Common/Rating/Rateing';
 import Slider from '@mui/material/Slider';
 import { Rating } from '@mui/material';
+import { getSingleAdSubCategory, loadAdSubCategorys } from '../../../Actions/subCategoryAdsAction';
+import ProductsAds from './ProductsAds';
 
 
 
 
 const Products = () => {
+
+    
     // LOAD ACTIONS
     const [cityFilter, setCityFilter] = useState('');
     const [priceFilter, setPriceFilter] = useState("");
     const { sub_category_id } = useParams();
+
     // console.log(sub_category_id)
     let dispatch = useDispatch();
     const { products } = useSelector(state => state.productData);
@@ -30,6 +35,7 @@ const Products = () => {
     }
 
     const priceFilterChanger = (filtertype) => {
+        
         if (priceFilter !== '') {
             if (filtertype === 'hour_price') {
                 let data = filterProducts.filter((curr) => {
@@ -135,22 +141,15 @@ const Products = () => {
 
     // rating filter functionality
     const [rate, setRate] = useState('');
-
     const ratingFilterHandler = (e) => {
         setRate(e.target.value)
     }
 
-
-
     return (
         <>
 
-            {/* SUB CATEGORY BANNER */}
-            <Carousel showThumbs={false}>
-                <div>
-                    <img src={`${process.env.REACT_APP_IPURL}${subCategory.sub_cat_icon}`} />
-                </div>
-            </Carousel>
+             {/* SUB CATEGORY BANNER */}
+             <ProductsAds></ProductsAds>
 
 
             {/* <!-- basic-blog-area --> */}
@@ -237,7 +236,7 @@ const Products = () => {
                                         <div className="portfolio-thumb">
                                             <img src={`${process.env.REACT_APP_IPURL}${product.images}`} alt="" />
                                             <div className="btn-furniture weekly-product">
-                                                <h5 className="text-white">{product.product_name}</h5>
+                                                <h5 className="">{product.product_name}</h5>
                                                 <small>from <span>₹ {product.hour_price ? `${product.hour_price}/Hour` : product.day_price ? `${product.day_price}/Day` : product.month_price ? `${product.month_price}/Month` : product.threemonth_price ? `${product.threemonth_price}/Quarterly` : product.yearly_price ? `${product.yearly_price}/Yearly` : 'Price'}</span></small>
                                                 {/* <Rateing
                                                         value={product.avg_rating}

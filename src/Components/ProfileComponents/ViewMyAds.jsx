@@ -97,6 +97,8 @@ const ViewMyAds = () => {
     };
     const handleDelete = () => {
         dispatch(deleteProduct(data));
+        setPop(false);
+        setOpen(true);
     }
 
     useEffect(() => {
@@ -243,6 +245,8 @@ const ViewMyAds = () => {
         }
     };
 
+
+
     return (
         <>
             <div className="col-lg-12 overFlowScrollWeek">
@@ -253,25 +257,30 @@ const ViewMyAds = () => {
                 </div>
                 {filterProduct.length !== 0 ? filterProduct && filterProduct.map((cur) => {
                     return <div className="col-lg-3 col-sm-12" style={{ marginBottom: "1rem" }} >
-                        <Link to={`/product/${cur.product_name}/${cur.id}`}>
-                            <div className="ad main-ad">
-                                <div className="d-flex justify-content-end p-0 m-0">
-                                    <Link className="p-0" to={`/product/${cur.product_name}/${cur.id}`}><VisibilityIcon style={{ color: '#1acdf1' }} /></Link>
+                        {/* <Link to={`/product/${cur.product_name}/${cur.id}`}> */}
+                        <div className="ad main-ad">
+                            <div className="d-flex justify-content-between p-0 m-0">
+                                <div className="is_approved_status" style={{ background: `${cur.color}`, color: `${cur.text_color}` }}>
+                                    {cur.is_approved_status_name}
                                 </div>
-                                <figure>
-                                    <img src={`${process.env.REACT_APP_IPURL}${cur.images}`} alt="" className='img-fluid' />
-                                </figure>
-                                <h3 className='text-center'>{cur.product_name}</h3>
-                                <h5 className='text-center'>₹{cur.hour_price} - ₹{cur.month_price}</h5>
-                                {/* <p className='product_descripton text-center'>{cur.description}</p> */}
-                                <div className='d-flex justify-content-end row'>
-
-                                    <Link className="btn btn-primary col-5 mx-auto p-3" to="#" onClick={() => editProduct(cur.id)}>Edit</Link>
-                                    <button className="btn btn-primary col-5 mx-auto p-3" onClick={() => { handleClickOpen(cur.id) }}>remove</button>
-
-                                </div>
+                                <Link className="p-0" to={`/product/${cur.product_name}/${cur.id}`}>
+                                    <VisibilityIcon style={{ color: '#1acdf1' }} />
+                                </Link>
                             </div>
-                        </Link>
+                            <Link className="p-0 portfolio-thumb" to={`/product/${cur.product_name}/${cur.id}`}>
+                                <img src={`${process.env.REACT_APP_IPURL}${cur.images}`} alt="" className='img-fluid' />
+                            </Link>
+                            <h3 className='text-center'>{cur.product_name}</h3>
+                            <h5 className='text-center'>₹{cur.hour_price} - ₹{cur.month_price}</h5>
+                            {/* <p className='product_descripton text-center'>{cur.description}</p> */}
+                            <div className='d-flex justify-content-end row'>
+
+                                <Link className="btn btn-primary col-5 mx-auto p-3" to="#" onClick={() => editProduct(cur.id)}>Edit</Link>
+                                <button className="btn btn-primary col-5 mx-auto p-3" onClick={() => { handleClickOpen(cur.id) }}>remove</button>
+
+                            </div>
+                        </div>
+                        {/* </Link> */}
                     </div>
                 }) : <div className='col-lg-12 d-flex justify-content-center'><h3>Products Not Found</h3></div>}
             </div>
@@ -316,7 +325,7 @@ const ViewMyAds = () => {
                                             <div className="col-md-6">
                                                 <div className="form-group row">
                                                     <label className="col-sm-3 col-form-label" htmlFor="exampleInputEmail1">Select City</label>
-                                                    <select name="city" id="" className="col-sm-8 form-control"  value={!state ? "" : state.city} onChange={onChangeHandler}>
+                                                    <select name="city" id="" className="col-sm-8 form-control" value={!state ? "" : state.city} onChange={onChangeHandler}>
                                                         <option value="">Select City</option>
 
                                                         {citys.map((val, i) => {
@@ -368,9 +377,9 @@ const ViewMyAds = () => {
                                                 <div className="form-group row">
                                                     <label className="col-sm-3 col-form-label">Product Description</label>
                                                     <div className="col-sm-9">
-                                                    <textarea cols="15" rows="10" maxlength="256" className="form-control" name="description" value={state.description} onChange={onChangeHandler} placeholder="Product Description" >
-                                                    {!state ? "" : state.description}
-                                                    </textarea>
+                                                        <textarea cols="15" rows="10" maxlength="256" className="form-control" name="description" value={state.description} onChange={onChangeHandler} placeholder="Product Description" >
+                                                            {!state ? "" : state.description}
+                                                        </textarea>
                                                         {/* <textarea className="form-control" name="description" onChange={onChangeHandler}>
                                                              <textarea /> */}
                                                     </div>

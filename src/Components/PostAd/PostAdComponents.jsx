@@ -20,6 +20,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const PostAdComponents = () => {
+    let maxlength = "10";
     let dispatch = useDispatch();
     const fullName = localStorage.getItem('fullname');
     const id = localStorage.getItem('id');
@@ -366,7 +367,7 @@ const PostAdComponents = () => {
         }
         setOpen(false);
         if (alert.sev === 'success') {
-            navigate("/profile");
+            navigate("/view-my-ad");
         }
     };
 
@@ -454,45 +455,45 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Hour)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="hour_price" value={state.hour_price} onChange={onChangeHandler} placeholder="Product Amount (Hour)" onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" step="1" className="form-control" name="hour_price" value={state.hour_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Hour)" onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Days)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="day_price" value={state.day_price} onChange={onChangeHandler} placeholder="Product Amount (Days)" onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" className="form-control" step={1} name="day_price" value={state.day_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Days)" onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Month)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="month_price" value={state.month_price} onChange={onChangeHandler} placeholder="Product Amount (Month)" onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" className="form-control" step={1} name="month_price" value={state.month_price} maxLength={7}  onChange={onChangeHandler} placeholder="Product Amount (Month)" onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Quarterly)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="threemonth_price" value={state.threemonth_price} onChange={onChangeHandler} placeholder="Product Amount (Quarterly)" onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" className="form-control" step={1} name="threemonth_price" value={state.threemonth_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Quarterly)" onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Yearly)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="yearly_price" value={state.yearly_price} onChange={onChangeHandler} placeholder="Product Amount (Yearly)" onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" className="form-control" step={1} name="yearly_price" value={state.yearly_price} maxLength={8} onChange={onChangeHandler} placeholder="Product Amount (Yearly)" onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Discount (%)</label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="discount" value={state.discount} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Discount' max="2" />
+                                        <input type="phone" min="0" className="form-control" name="discount" value={state.discount} maxLength={2} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Discount' max="2" />
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Security Deposit</label>
                                     <div className="col-sm-9">
-                                        <input type="number" className="form-control" name="security_deposit" value={state.security_deposit} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Security Deposit' min="0" />
+                                        <input type="phone" className="form-control" name="security_deposit" value={state.security_deposit} maxLength={8} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Security Deposit' min="0" />
                                     </div>
                                 </div>
 
@@ -554,7 +555,7 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label" htmlFor="exampleInputEmail1">Phone Number <span className='red'>*</span></label>
                                     <div className="col-sm-9">
-                                        <input type="number" min="0" className="form-control" name="seller_mobile" placeholder='Phone Number' value={state.seller_mobile} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} />
+                                        <input type="phone" min="0" className="form-control" name="seller_mobile" placeholder='Phone Number' maxLength={10} value={state.seller_mobile} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} />
                                     </div>
                                 </div>
 

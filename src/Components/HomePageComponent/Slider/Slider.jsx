@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { loadSliders } from '../../../Actions/sliderAction';
+import { Link } from 'react-router-dom';
 
 const Slider = () => {
 
@@ -18,7 +19,7 @@ const Slider = () => {
         <>
             {/* <!-- slider start --> */}
             <Carousel
-                showThumbs={false}
+                showThumbs={false} 
                 infiniteLoop
                 transitionTime={1000}
                 autoPlay
@@ -26,11 +27,11 @@ const Slider = () => {
                 {sliders &&
                     sliders.map((slider, i) => {
                         return (
-                            <div className='maxHeight'>
-                                <img className='maxHeight' style={{ height: "500px" }} src={`${process.env.REACT_APP_IPURL}${slider.image}`} />
-
-                                {/* <p className="legend">{slider.title}</p> */}
-                            </div>
+                            <a href={slider.title}>
+                                <div className='maxHeight'>
+                                    <img className='maxHeight' style={{ height: "500px" }} src={`${process.env.REACT_APP_IPURL}${slider.image}`} />
+                                </div>
+                            </a>
                         );
                     })}
             </Carousel>

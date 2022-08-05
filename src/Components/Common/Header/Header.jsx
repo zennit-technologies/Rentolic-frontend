@@ -120,7 +120,7 @@ const Header = () => {
                             </div>
                             <div className="col-xl-3 col-lg-3 col-md-3 col-12 d-flex align-items-center justify-content-center">
 
-                                <Link to="/post-ad" className='mr-3'><button className="glow-on-hover" type="button">Sell</button></Link>
+                                <Link to="/post-ad" className='mr-3'><button className="glow-on-hover" type="button">Post Ad</button></Link>
 
                                 {/* <div className="social-icon f-left d-md-block p-0"> */}
                                 {
@@ -161,7 +161,7 @@ const Header = () => {
                 <div className="header-bottom-area">
                     <div className="container">
                         <div className="row align-items-center">
-                            <div className="col-xl-12 col-lg-12">
+                            <div className="col-xl-12 col-lg-12 p-0">
                                 {/* <div className="row"> */}
                                 <div className="main-menu f-left">
                                     <nav id="mobile-menu navResponsive">
@@ -183,11 +183,11 @@ const Header = () => {
                                                             </ul>
                                                         </li>
                                                     );
-                                                }).slice([0], [6])}
+                                                }).slice([0], [8])}
                                         </ul>
                                     </nav>
                                 </div>
-                                <div className="header-text f-right d-lg-block business-header">
+                                {/* <div className="header-text f-right d-lg-block business-header">
                                     <Link to="/" className="header-rentol">Rentolic for Business</Link>
                                     {contacts &&
                                         contacts.map((contact, i) => {
@@ -195,7 +195,7 @@ const Header = () => {
                                                 <a href={`tel:${contact.phone}`} style={{color: "white"}}> +91 {contact.phone}</a>
                                             );
                                         })}
-                                </div>
+                                </div> */}
                                 {/* <div className="mobile-menu"></div> */}
                                 {/* </div> */}
                             </div>

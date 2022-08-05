@@ -35,7 +35,7 @@ import ForgitPassword from './Components/LoginPageComponents/SignIn/ForgitPasswo
 
 
 
-function App() {
+function App() { 
   return (
     <>
       <UserAuthContextProvider>

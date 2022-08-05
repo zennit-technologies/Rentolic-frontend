@@ -71,8 +71,8 @@ const LocationPanel = () => {
                                 <div class="modal-body col-lg-12">
                                     {citys &&
                                         citys.filter((val) => val.is_featured === 1).map((city, i) => {
-                                            return (<button className="btn btn-new bg-light" 
-                                            style={{border: "1px solid yellowgreen", padding: "4px 15px !important" }} key={i} >
+                                            return (<button className="btn btn-new bg-light col-4 col-lg-2" 
+                                            style={{border: "1px solid #00adef", padding: "4px 15px !important" }} key={i} >
                                                 <div className="citys" data-dismiss="modal" onClick={() => productFilter(city.id, city.city_name)}>
                                                     <div className="city-list">
                                                         <img src={`${process.env.REACT_APP_IPURL}${city.city_icon}`} className='img-fluid text-cap' alt={city.city_name} />
@@ -80,7 +80,7 @@ const LocationPanel = () => {
                                                     <h5 className="text-center"><a className="navTextTranform text-cap">{city.city_name}</a></h5>
                                                 </div></button>
                                             );
-                                        })}
+                                        })} 
                                 </div>
 
                                 {/* <button className="btn btn-new btn-primary" onClick={() => setStyle('block')}>View All</button> */}

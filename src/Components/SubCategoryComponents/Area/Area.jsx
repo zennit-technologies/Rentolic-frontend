@@ -14,29 +14,11 @@ const Area = () => {
     // LOAD ACTIONS ENDS
     return (
         <>
-            {/* <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    {ads &&
-                        ads.map((state, i) => {
-                            return (
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100"
-                                        src={`${process.env.REACT_APP_IPURL}${state.icon}`} alt="First slide" />
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>{state.adName}</h5>
-                                        <p>{state.subtitle}</p>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                </div>
-            </div> */}
-
-            <Carousel
+            {/* <Carousel
                 showThumbs={false}
                 infiniteLoop
                 // transitionTime={6000}
-                // autoPlay
+                autoPlay
             >
                 {ads &&
                     ads.map((state, i) => {
@@ -49,6 +31,8 @@ const Area = () => {
                         );
                     })}
             </Carousel>
+
+            <h1>hiiii</h1> */}
         </>
     )
 }

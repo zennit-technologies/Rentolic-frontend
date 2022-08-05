@@ -201,7 +201,7 @@ label {
 	border: 0;
 }
 .btn-new {
-	padding: 4px 45px !important;
+	padding: 0px !important;
 }
 .btn.btn-border {
 	background: transparent;
@@ -443,7 +443,7 @@ label {
 }
 .main-menu ul li {
 	/* display: inline-block; */
-	margin-left: 40px;
+	margin-left: 10px;
 	/* position: relative; */
 }
 .main-menu ul li:hover > a{color:#fbba42 }
