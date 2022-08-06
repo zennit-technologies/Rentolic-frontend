@@ -58,8 +58,6 @@ const Specification = () => {
         setOpen3(true);
     };
 
-
-
     const { product_id } = useParams();
     console.log(product_id)
 
@@ -293,12 +291,12 @@ const Specification = () => {
                                 </div>
 
                                 <span>
-                                    {filterProduct.length === 0 ? 
-                                    <h5>Phone Number </h5> 
-                                    : fullName !== null ? 
-                                    <h5>Phone Number : {`${filterProduct[0].seller_mobile}`}
-                                    </h5>: <h5></h5>
-                                    } 
+                                    {filterProduct.length === 0 ?
+                                        <h5>Phone Number </h5>
+                                        : fullName !== null ?
+                                            <h5>Phone Number : {`${filterProduct[0].seller_mobile}`}
+                                            </h5> : <h5></h5>
+                                    }
                                 </span>
 
                                 <div className="Day-table mt-45">
@@ -458,19 +456,21 @@ const Specification = () => {
                 open={open}
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
+                fullWidth={true}
+                maxWidth={'md'}
 
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        <div className='location-size' style={{ height: "50vh", width: "77vw" }}>
+                        <div className='location-size' style={{ height: "60vh", width: "63vw" }}>
 
 
                             {/* Google Map Box */}
 
-                            {filterProduct[0].lat ? <GoogleMap
+                            {filterProduct[0].lat ? <><GoogleMap
                                 center={{ lat: parseFloat(filterProduct[0].lat), lng: parseFloat(filterProduct[0].log) }}
                                 zoom={15}
-                                mapContainerStyle={{ width: '100%', height: '100%' }}
+                                mapContainerStyle={{ width: '100%', height: '85%' }}
                                 options={{
                                     zoomControl: true,
                                     streetViewControl: true,
@@ -480,7 +480,12 @@ const Specification = () => {
                                 onLoad={map => setMap(map)}
                             >
                                 {map && <Marker position={{ lat: parseFloat(filterProduct[0].lat), lng: parseFloat(filterProduct[0].log) }} />}
-                            </GoogleMap> : <h4>Location Not Found</h4>}
+                            </GoogleMap>
+                                <div className="d-flex mt-4 justify-content-center">
+                                    <a class="" target='_blank' href={`https://www.google.com/maps/search/?api=1&query=${filterProduct[0].lat},${filterProduct[0].log}`}>
+                                        <button class="glow-on-hover" type="button">Get location</button></a>
+                                </div>
+                            </> : <h4>Location Not Found</h4>}
                         </div>
                     </DialogContentText>
                 </DialogContent>
