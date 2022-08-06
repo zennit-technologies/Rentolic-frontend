@@ -57,7 +57,7 @@ const SignIn = () => {
         email: "",
         phone: "",
         password: "",
-        tnc: "",
+        tnc: false,
     })
 
     const {
@@ -136,6 +136,7 @@ const SignIn = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        console.log(state)
         if (!state.fullName) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Full Name !", });
@@ -371,8 +372,8 @@ const SignIn = () => {
                                                                     />
                                                                     {/* <!-- <span className="fa fa-eye-slash pwd-toggle"></span> --> */}
                                                                     <div id="recaptcha-container">
-                                                                        <input type="checkbox" name="tnc" onChange={onChangeHandler} />
-                                                                        Agree to <Link to="/">Terms and Conditions</Link>
+                                                                        <input type="checkbox" name="tnc" onClick={()=>setState({...state,tnc:!state.tnc})} />
+                                                                        &nbsp;Agree to <Link to="/">Terms and Conditions</Link>
                                                                     </div>
 
                                                                     <div className="form-group">
