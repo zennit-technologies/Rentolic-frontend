@@ -93,7 +93,7 @@ const Specification = () => {
             </div>
             <hr />
         </div>
-    }) : <h4>Not Found</h4> : <h4>Not Found</h4>;
+    }) : <h4></h4> : <h4></h4>;
 
     const fullFaqWithKey = filterCategory.length !== 0 ? filterCategory[0].faq_field != null ? JSON.parse(filterCategory[0].faq_field).map((cur, i) => {
         return <div className="accordion-item" key={i}>
@@ -163,9 +163,9 @@ const Specification = () => {
                                 </div>
                                 <nav aria-label="breadcrumb ">
                                     <ol className="breadcrumb justify-content-left pb-4 ">
-                                        <li className="breadcrumb-item">
+                                        {/* <li className="breadcrumb-item">
                                             <Link to="#" onClick={() => setToggle(1)}>OVERVIEW</Link>
-                                        </li>
+                                        </li> */}
                                         {/* <li className="breadcrumb-item">
                                             <Link to="#">IMAGES</Link>
                                         </li>

@@ -231,6 +231,7 @@ const SignIn = () => {
                                                                 className="form-control email"
                                                                 name="phonenum"
                                                                 placeholder="Phone Number"
+                                                                maxLength={10}
                                                                 onChange={(e) => setData({ ...data, phone: `+91${e.target.value}` })}
                                                             />
                                                         </div>
@@ -322,6 +323,7 @@ const SignIn = () => {
                                                                     name="phone"
                                                                     placeholder="Phone Number"
                                                                     // value={state.phone}
+                                                                    maxLength={10}
                                                                     onChange={(e) => setState({ ...state, phone: `+91${e.target.value}` })}
                                                                 />
                                                             </div>
