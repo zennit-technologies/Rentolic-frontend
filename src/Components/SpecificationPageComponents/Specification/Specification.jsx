@@ -462,7 +462,7 @@ const Specification = () => {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        <div className='location-size' style={{ height: "60vh", width: "63vw" }}>
+                        <div className='location-size' style={{ height: "60vh", width: "100%" }}>
 
 
                             {/* Google Map Box */}
