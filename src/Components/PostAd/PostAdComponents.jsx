@@ -437,7 +437,7 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Name <span className='red'>*</span></label>
                                     <div className="col-sm-9">
-                                        <input type="text" className="form-control" name="product_name" placeholder='Product Name' value={state.product_name} onChange={onChangeHandler} />
+                                        <input type="phone" className="form-control" name="product_name" placeholder='Product Name' value={state.product_name} maxLength={48} onChange={onChangeHandler} />
                                     </div>
                                 </div>
                                 <div className="form-group row">

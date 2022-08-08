@@ -159,7 +159,7 @@ const Specification = () => {
                                         value={filterProduct[0].avg_rating}
                                     // text={product.numReviews + ' reviews'}
                                     /> */}
-                                    <Rating name="read-only" value={filterProduct[0].avg_rating} readOnly />
+                                    <Rating name="read-only" value={filterProduct[0].avg_rating === null ? 0 : filterProduct[0].avg_rating} readOnly />
                                 </div>
                                 <nav aria-label="breadcrumb ">
                                     <ol className="breadcrumb justify-content-left pb-4 ">

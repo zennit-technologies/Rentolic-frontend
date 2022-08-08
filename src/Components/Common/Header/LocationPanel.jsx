@@ -39,7 +39,7 @@ const LocationPanel = () => {
     // LOAD ACTIONS ENDS
     return (
         <>
-            <div className="col-xl-3 col-lg-3 col-md-3 col-3 bg-transparent">
+            <div className="col-xl-3 col-lg-3 col-md-3 col-3 bg-transparent ">
                 <Link to="#" className="bg-transparent d-flex flex-column align-items-center p-0 text-light" onClick={() => setPop(true)}>
                     <i className="fa fa-map-marker text-center"
                         style={{ fontSize: "13px" }}></i>

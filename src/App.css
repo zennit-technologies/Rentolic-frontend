@@ -529,7 +529,9 @@ img {
 
 @media screen and (max-width:600px) {
     .navResponsive .navTextTranform {
-        display: none !important;
+        /* display: none !important; */
+        background: #00adef;
+        padding: 1px 10px;
     }
 }
 
@@ -549,6 +551,7 @@ img {
 
     .btn-new {
         padding: 4px 5px !important;
+        color: white;
     }
 
     .navTextTranform::before {

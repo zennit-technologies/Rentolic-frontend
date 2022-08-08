@@ -169,6 +169,11 @@
   background: #00adef ;
 }
 
+@media (max-width: 767px){
+.header-bottom-area {
+  background: #071f43;
+}}
+
 .header-button>a {
   /* border: 2px solid #666; */
   /* border-radius: 0; */
@@ -1058,8 +1063,8 @@ fieldset input:focus {
 
 .navResponsive {
   display: flex;
-  flex-flow: wrap;
-  /* overflow: scroll; */
+  position: relative;
+  overflow: scroll;
 }
 
 .navResponsive::-webkit-scrollbar {

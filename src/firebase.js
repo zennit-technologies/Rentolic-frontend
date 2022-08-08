@@ -15,19 +15,33 @@
 //   const auth = firebase.auth();
 //   export { auth, firebase };
 
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAqV7a74rIZfiSkoKZe_Kvk-rma8dIJZac",
+//   authDomain: "otp-app-demo-7c1da.firebaseapp.com",
+//   databaseURL: "https://otp-app-demo-7c1da-default-rtdb.firebaseio.com",
+//   projectId: "otp-app-demo-7c1da",
+//   storageBucket: "otp-app-demo-7c1da.appspot.com",
+//   messagingSenderId: "130925204569",
+//   appId: "1:130925204569:web:174f2b416ad0d080a78d48"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAqV7a74rIZfiSkoKZe_Kvk-rma8dIJZac",
-  authDomain: "otp-app-demo-7c1da.firebaseapp.com",
-  databaseURL: "https://otp-app-demo-7c1da-default-rtdb.firebaseio.com",
-  projectId: "otp-app-demo-7c1da",
-  storageBucket: "otp-app-demo-7c1da.appspot.com",
-  messagingSenderId: "130925204569",
-  appId: "1:130925204569:web:174f2b416ad0d080a78d48"
+  apiKey: "AIzaSyCpX6osHGYDkKTd26L3EGCqbQ6v9A3_bfk",
+  authDomain: "rentolic.firebaseapp.com",
+  projectId: "rentolic",
+  storageBucket: "rentolic.appspot.com",
+  messagingSenderId: "916627980843",
+  appId: "1:916627980843:web:f35ff57a420285e734a06e",
+  measurementId: "G-ET67PZL8C7"
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
+
+
+
