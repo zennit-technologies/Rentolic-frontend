@@ -110,6 +110,7 @@ input[type=number]::-webkit-outer-spin-button {
     .glow-on-hover {
         width: 80px !important;
         height: 40px !important;
+        font-size: 1rem;
     }
 
     .citys {
@@ -129,7 +130,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media screen and (max-width:780px) {
     .buy-logo img {
-        width: 50px
+        width: 85px
     }
 }
 
@@ -529,7 +530,9 @@ img {
 
 @media screen and (max-width:600px) {
     .navResponsive .navTextTranform {
-        display: none !important;
+        /* display: none !important; */
+        background: #00adef;
+        padding: 1px 10px;
     }
 }
 
@@ -549,6 +552,7 @@ img {
 
     .btn-new {
         padding: 4px 5px !important;
+        color: white;
     }
 
     .navTextTranform::before {

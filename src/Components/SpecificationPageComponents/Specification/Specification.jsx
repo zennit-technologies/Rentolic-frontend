@@ -89,7 +89,7 @@ const Specification = () => {
             </div>
             <hr />
         </div>
-    }) : <h4>Not Found</h4> : <h4>Not Found</h4>;
+    }) : <h4></h4> : <h4></h4>;
 
     const fullFaqWithKey = filterCategory.length !== 0 ? filterCategory[0].faq_field != null ? JSON.parse(filterCategory[0].faq_field).map((cur, i) => {
         return <div className="accordion-item" key={i}>
@@ -144,7 +144,7 @@ const Specification = () => {
                 <div className="container-fluid extra-padding">
                     <div className="row mb-2">
                         <div className="col-lg-12">
-                            <div className="page-title text-left maruti-suzuki mb-20">
+                            <div className="page-title text-left maruti-suzuki mb-10">
                                 <div className="rating-star d-flex">
                                     <h4>{filterProduct.length === 0 ? <h2>Product Name</h2> : filterProduct[0].product_name} &nbsp;&nbsp;</h4>
                                     {/* <Rateing
@@ -152,25 +152,11 @@ const Specification = () => {
                                     // text={product.numReviews + ' reviews'}
                                     /> */}
                                     <Rating name="read-only" value={filterProduct[0]?.avg_rating} readOnly />
-                                </div>
-                                <nav aria-label="breadcrumb ">
-                                    <ol className="breadcrumb justify-content-left pb-4 ">
-                                        <li className="breadcrumb-item">
-                                            <Link to="#" onClick={() => setToggle(1)}>OVERVIEW</Link>
-                                        </li>
-                                        {/* <li className="breadcrumb-item">
-                                            <Link to="#">IMAGES</Link>
-                                        </li>
-                                        <li className="breadcrumb-item">
-                                            <Link to="#" onClick={() => setToggle(2)}>FULL SPECIFICATIONS</Link>
-                                        </li>
-                                        <li className="breadcrumb-item">
-                                            <Link to="#" onClick={() => setToggle(3)}>REVIEW</Link>
-                                        </li> */}
 
-                                        {/* <!-- <li className="breadcrumb-item active" aria-current="page"> Product details</li> --> */}
-                                    </ol>
-                                </nav>
+                                    <Rating name="read-only" value={filterProduct[0].avg_rating === null ? 0 : filterProduct[0].avg_rating} readOnly />
+
+                                </div>
+                               
                             </div>
                         </div>
                         <div className="col-xl-5 col-lg-5 pt-4 product-car">
@@ -233,10 +219,15 @@ const Specification = () => {
                                 <div className="product-cat mt-20">
                                     <ul>
 
+
                                         <li>{filterProduct.length === 0 ? <h2>Share</h2> : fullName !== null ? <span className="d-flex align-items-center justify-content-left share-mobile" style={{ fontSize: '19px', fontWeight: "600" }}><div>
                                             {/* <h4>Get Us On:</h4> */}
                                         </div> <a href={`tel:${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></a><a href={`https://wa.me/${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></a>
                                             <Link to="" onClick={() => getLocation(filterProduct[0]?.lat, filterProduct[0]?.log)} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/location.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Location</label></Link>
+
+                                        <li>{filterProduct.length === 0 ? <h2>Share</h2> : fullName !== null ? <span className="d-flex align-items-center justify-content-left share-mobile" style={{ fontSize: '19px', fontWeight: "600" }}><div><h4></h4></div> <a href={`tel:${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></a><a href={`https://wa.me/${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></a>
+                                            <Link to="" onClick={() => getLocation(filterProduct[0].lat, filterProduct[0].log)} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/location.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Location</label></Link>
+
                                             <IconButton
                                                 id="basic-button"
                                                 className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4"
@@ -279,7 +270,7 @@ const Specification = () => {
                                                 }
                                             </Menu>
                                         </span>
-                                            : <span className="d-flex align-items-center" style={{ fontSize: '19px', fontWeight: "600" }}>Get Us On:  <Link to="/signIn" className="d-flex flex-column justify-content-center align-items-left ml-4 mr-4" ><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></Link><Link to="/signIn" className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></Link>
+                                            : <span className="d-flex align-items-center" style={{ fontSize: '19px', fontWeight: "600" }}><Link to="/signIn" className="d-flex flex-column justify-content-center align-items-left ml-4 mr-4" ><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></Link><Link to="/signIn" className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></Link>
                                                 <Link to="/signIn" className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/location.png" alt="" height="40" width="40" /><label className="text-center text-muted ">Location</label></Link></span>} </li>
                                     </ul>
                                 </div>
@@ -456,7 +447,7 @@ const Specification = () => {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        <div className='location-size' style={{ height: "60vh", width: "63vw" }}>
+                        <div className='location-size' style={{ height: "60vh", width: "100%" }}>
 
 
                             {/* Google Map Box */}

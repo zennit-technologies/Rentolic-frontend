@@ -459,6 +459,11 @@ label {
 	width: 150px;
 	z-index: 9;
 }
+@media (max-width: 767px){
+	.main-menu ul li ul.submenu {
+	  display: none;
+	}}
+
 .main-menu ul li:hover > ul.submenu{opacity: 1;visibility: visible;top:100%;}
 .main-menu ul li ul.submenu li {
   border-bottom: 2px solid #1e2128;

@@ -17,7 +17,7 @@ const HomepageScreen = () => {
 
       {/* <RentalStatistics /> */}
 
-      <WeeklyProducts />
+      {/* <WeeklyProducts /> */}
 
       {/* ALL CATEGORY START */}
       <AllCategoryPanel />

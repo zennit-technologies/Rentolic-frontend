@@ -45,7 +45,10 @@ const SignIn = () => {
     const { setUpRecaptha } = useUserAuth();
     const [flag, setFlag] = useState(false);
     const [flag2, setFlag2] = useState(false);
-    const [user, setUser] = useState({ id: "", fullName: "", login: "", phone: "", token: "", tnc: false })
+    const [user, setUser] = useState({
+        id: "", fullName: "", login: "", phone: "", token: "",
+        // tnc: false 
+    })
 
 
     const [sign, setSign] = useState(1);
@@ -57,12 +60,12 @@ const SignIn = () => {
         email: "",
         phone: "",
         password: "",
-        tnc: false,
+        // tnc: false,
     })
 
-    const {
-        tnc,
-    } = state;
+    // const {
+    //     tnc,
+    // } = state;
 
     const navigate = useNavigate();
 
@@ -157,10 +160,10 @@ const SignIn = () => {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Confirm Password !", });
         }
-        else if (!tnc) {
-            setOpen(true);
-            setAlert({ sev: "error", content: "Please Agree to Terms and Conditions", });
-        }
+        // else if (!tnc) {
+        //     setOpen(true);
+        //     setAlert({ sev: "error", content: "Please Agree to Terms and Conditions", });
+        // }
         else if (confirm !== state.password) {
             setOpen(true);
             setAlert({ sev: "error", content: "Password Does Not Match !", });
@@ -171,7 +174,10 @@ const SignIn = () => {
             if (filterUser.length !== 0) {
                 setOpen(true);
                 setAlert({ sev: "error", content: "This Mobile Number is already registered !", });
+
                 state.phone = state.phone.slice(3);
+
+
             }
             else {
                 getOtp2(e);
@@ -216,9 +222,14 @@ const SignIn = () => {
                                                                 className="form-control email"
                                                                 name="phonenum"
                                                                 placeholder="Phone Number"
+
                                                                 // value={data.phone}
                                                                 onChange={(e) => setData({ ...data, phone: e.target.value })}
                                                                 onKeyPress={(e) => { if (e.target.value.length >= 10) e.preventDefault() }}
+
+                                                                maxLength={10}
+                                                                onChange={(e) => setData({ ...data, phone: `+91${e.target.value}` })}
+
                                                             />
                                                         </div>
                                                         <div className="form-group">
@@ -271,8 +282,28 @@ const SignIn = () => {
                                                             >SIGN IN</button>
 
 
+                                                            <Stack spacing={2} sx={{ width: '100%' }} id="stack" className="form-group">
+                                                                <button
+                                                                    className="btn btn-lg btn-primary"
+                                                                    type="button"
+                                                                    onClick={handleSubmit}
+                                                                >SIGN IN</button>
+
+                                                                {/* <div
+                                                                    id="recaptcha-container"
+                                                                    class="justify-center flex"
+                                                                ></div> */}
+
+                                                                {/* Snackbar */}
+                                                                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
+                                                                    <Alert onClose={handleClose} severity={alert.sev} sx={{ width: '100%' }}>
+                                                                        {alert.content}
+                                                                    </Alert>
+                                                                </Snackbar>
+                                                            </Stack>
                                                             <Link to="#" onClick={() => { setSign(2) }}><p>Create Your New Account</p></Link>
                                                         </div>
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -303,8 +334,13 @@ const SignIn = () => {
                                                                     name="phone"
                                                                     placeholder="Phone Number"
                                                                     // value={state.phone}
+
                                                                     onChange={(e) => setState({ ...state, phone: e.target.value })}
                                                                     onKeyPress={(e) => { if (e.target.value.length >= 10) e.preventDefault() }}
+
+
+                                                                    maxLength={10}
+                                                                    onChange={(e) => setState({ ...state, phone: `+91${e.target.value}` })}
 
                                                                 />
                                                             </div>
@@ -354,12 +390,20 @@ const SignIn = () => {
                                                                         onChange={(e) => setConfirm(e.target.value)}
                                                                     />
                                                                     {/* <!-- <span className="fa fa-eye-slash pwd-toggle"></span> --> */}
+
                                                                     <div id="recaptcha-container">
                                                                         <input type="checkbox" name="tnc" onClick={() => setState({ ...state, tnc: !state.tnc })} />
+
+                                                                    {/* <div id="recaptcha-container">
+                                                                        <input type="checkbox" name="tnc" requried
+                                                                        onClick={() => setState({ ...state, tnc: !state.tnc })} 
+                                                                        />
+
                                                                         &nbsp;Agree to <Link to="/">Terms and Conditions</Link>
-                                                                    </div>
+                                                                    </div> */}
 
                                                                     <div className="form-group">
+
                                                                         <button to=""
                                                                             className="btn btn-lg btn-primary btn-block"
                                                                             type="button"
@@ -367,10 +411,31 @@ const SignIn = () => {
                                                                         >SIGN UP</button>
 
 
+                                                                        <Stack spacing={2} sx={{ width: '100%' }} id="stack" >
+                                                                            <button to=""
+                                                                                className="btn btn-lg btn-primary btn-block"
+                                                                                type="button"
+                                                                                onClick={handleRegister}>
+                                                                                SIGN UP
+                                                                            </button>
+                                                                            {/* Snackbar */}
+                                                                            <Snackbar style={{ marginTop: "10rem" }} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
+                                                                                <Alert onClose={handleClose} severity={alert.sev} sx={{ width: '100%' }}>
+                                                                                    {alert.content}
+                                                                                </Alert>
+                                                                            </Snackbar>
+                                                                        </Stack>
 
+
+
+                                                                        <div
+                                                                            id="recaptcha-container"
+                                                                            class="justify-center flex"
+                                                                        ></div>
                                                                         <div className="p-4 box mt-0 text-center">
                                                                             Already have an account? <Link to="#" onClick={() => { setSign(1) }}>Log In</Link>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>

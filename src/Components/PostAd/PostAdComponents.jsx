@@ -423,7 +423,7 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Name <span className='red'>*</span></label>
                                     <div className="col-sm-9">
-                                        <input type="text" className="form-control" name="product_name" placeholder='Product Name' value={state.product_name} onChange={onChangeHandler} />
+                                        <input type="phone" className="form-control" name="product_name" placeholder='Product Name' value={state.product_name} maxLength={48} onChange={onChangeHandler} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
@@ -441,8 +441,12 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Hour)</label>
                                     <div className="col-sm-9">
+
                                         <input type="number" step=".01" className="form-control" name="hour_price" value={state.hour_price} onChange={onChangeHandler} placeholder="Product Amount (Hour)" onWheel={(e) => e.target.blur()}                                                                 onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}
 />
+
+                                        <input type="tel" min="0" step="1" className="form-control" name="hour_price" value={state.hour_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Hour)" pattern="^-?[0-9]\d*\.?\d*$" onWheel={(e) => e.target.blur()} />
+
                                     </div>
                                 </div>
                                 <div className="form-group row">

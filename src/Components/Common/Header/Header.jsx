@@ -94,7 +94,7 @@ const Header = () => {
                 <div className="header-top-area top-space">
                     <div className="container-fluid">
                         <div className="row align-items-center">
-                            <div className="col-xl-2 col-lg-2 col-md-2 col-12">
+                            <div className="col-xl-2 col-lg-2 col-md-2 col-6">
                                 <div className="row" style={{ alignItems: "center" }}>
                                     <div className="col-xl-8 col-lg-8 col-md-8 col-8">
                                         <div className="header-call text-center text-md-left">
@@ -110,7 +110,7 @@ const Header = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xl-7 col-lg-7 col-md-7 col-12 d-flex align-items-center justify-content-end">
+                            <div className="col-xl-7 col-lg-7 col-md-7 col-12 col-sm-12 d-flex align-items-center justify-content-end order-last">
                                 <div className="input-group input-search">
                                     <input type="search" className="form-control rounded"
                                         placeholder="Search for products,brands & more you want to rent" aria-label="Search"
@@ -118,7 +118,7 @@ const Header = () => {
                                     <button type="button" className="btn btn-outline-primary" onClick={searchClick}>Search</button>
                                 </div>
                             </div>
-                            <div className="col-xl-3 col-lg-3 col-md-3 col-12 d-flex align-items-center justify-content-center">
+                            <div className="col-xl-3 col-lg-3 col-md-3 col-6  d-flex align-items-center justify-content-center order-lg-last">
 
                                 <Link to="/post-ad" className='mr-3'><button className="glow-on-hover" type="button">Post Ad</button></Link>
 
@@ -163,7 +163,7 @@ const Header = () => {
                         <div className="row align-items-center">
                             <div className="col-xl-12 col-lg-12 p-0">
                                 {/* <div className="row"> */}
-                                <div className="main-menu f-left">
+                                <div className="main-menu f-left" style={{display:"contents"}}>
                                     <nav id="mobile-menu navResponsive">
                                         <ul className='navResponsive'>
                                             <ViewAll />
