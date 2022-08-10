@@ -59,11 +59,9 @@ const Specification = () => {
     };
 
     const { product_id } = useParams();
-    console.log(product_id)
 
     let dispatch = useDispatch();
     const { products } = useSelector(state => state.productData);
-    console.log(products)
     useEffect(() => {
         dispatch(loadProducts());
     }, []);
@@ -71,12 +69,10 @@ const Specification = () => {
     useEffect(() => {
         dispatch(loadCategoryes());
     }, []);
-    // console.log(products)
     const filterProduct = products.filter((cur) => {
         return cur.id == product_id
     })
     const filterCategory = categoryes.length !== 0 && filterProduct.length !== 0 ? categoryes.filter((cur) => cur.id == filterProduct[0].category_id) : [];
-    console.log("filter", filterCategory)
     const fieldWithKey = filterProduct.length !== 0 ? filterProduct[0].fields != null ? Object.entries(JSON.parse(filterProduct[0].fields)).map(([key, value]) => {
         return <td className='col-6'>
             <h6>{key}</h6>
@@ -113,10 +109,8 @@ const Specification = () => {
 
     // setField(fieldWithKey)
 
-    console.log(filterProduct);
     // const temp=filterProduct && filterProduct[0].hour_price/filterProduct[0].discount;
     // const final=filterProduct && filterProduct[0].hour_price-temp
-    // console.log(final)
 
     const handleClose = () => {
 
@@ -126,10 +120,8 @@ const Specification = () => {
     };
 
     const getLocation = (lat, lng) => {
-        console.log(parseFloat(lat), parseFloat(lng));
         setOpen(true);
         // setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) });
-        // console.log(center)
     }
 
     // New Map Direction
@@ -159,7 +151,7 @@ const Specification = () => {
                                         value={filterProduct[0].avg_rating}
                                     // text={product.numReviews + ' reviews'}
                                     /> */}
-                                    <Rating name="read-only" value={filterProduct[0].avg_rating} readOnly />
+                                    <Rating name="read-only" value={filterProduct[0]?.avg_rating} readOnly />
                                 </div>
                                 <nav aria-label="breadcrumb ">
                                     <ol className="breadcrumb justify-content-left pb-4 ">
@@ -241,8 +233,10 @@ const Specification = () => {
                                 <div className="product-cat mt-20">
                                     <ul>
 
-                                        <li>{filterProduct.length === 0 ? <h2>Share</h2> : fullName !== null ? <span className="d-flex align-items-center justify-content-left share-mobile" style={{ fontSize: '19px', fontWeight: "600" }}><div><h4>Get Us On:</h4></div> <a href={`tel:${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></a><a href={`https://wa.me/${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></a>
-                                            <Link to="" onClick={() => getLocation(filterProduct[0].lat, filterProduct[0].log)} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/location.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Location</label></Link>
+                                        <li>{filterProduct.length === 0 ? <h2>Share</h2> : fullName !== null ? <span className="d-flex align-items-center justify-content-left share-mobile" style={{ fontSize: '19px', fontWeight: "600" }}><div>
+                                            {/* <h4>Get Us On:</h4> */}
+                                        </div> <a href={`tel:${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/telephone.png" alt="" height="35" width="35" /><label className="text-center text-muted m-0">Call</label></a><a href={`https://wa.me/${filterProduct[0].seller_mobile}`} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" target="_blank"><img src="/img/icon/whatsapp.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Whatsapp</label></a>
+                                            <Link to="" onClick={() => getLocation(filterProduct[0]?.lat, filterProduct[0]?.log)} className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4" ><img src="/img/icon/location.png" alt="" height="40" width="40" /><label className="text-center text-muted m-0">Location</label></Link>
                                             <IconButton
                                                 id="basic-button"
                                                 className="d-flex flex-column justify-content-center align-items-center ml-4 mr-4"
@@ -276,7 +270,7 @@ const Specification = () => {
                                                     title="Copied"
                                                 // placement="right"
                                                 >
-                                                    <MenuItem onClick={() => { navigator.clipboard.writeText(window.location.href); handleTooltipOpen() }}><ContentPasteIcon style={{ color: 'black' }} /></MenuItem>
+                                                    <MenuItem onClick={() => { navigator.clipboard.writeText(window.location.href); handleTooltipOpen();setTimeout(()=>{setOpen3(false)},600); }}><ContentPasteIcon style={{ color: 'black' }} /></MenuItem>
                                                 </Tooltip>
                                                 {
                                                     SocialShare.map((val) => {
@@ -312,15 +306,15 @@ const Specification = () => {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>₹{filterProduct.length === 0 ? <h2></h2> : filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100}</td>
+                                                <td>₹{filterProduct.length === 0 ? <h2></h2> : filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : (filterProduct[0].hour_price - filterProduct[0].hour_price * filterProduct[0].discount / 100).toFixed(2)}</td>
 
-                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100}</td>
+                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : (filterProduct[0].day_price - filterProduct[0].day_price * filterProduct[0].discount / 100).toFixed(2)}</td>
 
-                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100}</td>
+                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : (filterProduct[0].month_price - filterProduct[0].month_price * filterProduct[0].discount / 100).toFixed(2)}</td>
 
-                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100}</td>
+                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : (filterProduct[0].threemonth_price - filterProduct[0].threemonth_price * filterProduct[0].discount / 100).toFixed(2)}</td>
 
-                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].yearly_price - filterProduct[0].yearly_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : filterProduct[0].yearly_price - filterProduct[0].yearly_price * filterProduct[0].discount / 100}</td>
+                                                <td>₹ {filterProduct.length === 0 ? <h2></h2> : filterProduct[0].yearly_price - filterProduct[0].yearly_price * filterProduct[0].discount / 100 <= 0 ? <span>NA</span> : (filterProduct[0].yearly_price - filterProduct[0].yearly_price * filterProduct[0].discount / 100).toFixed(2)}</td>
                                             </tr>
                                             {/* <tr>
                                                 <td className='lineBetween'>₹ {filterProduct.length === 0 ? <h2>₹</h2> : filterProduct[0].hour_price <= 0 ? <span>NA</span> : filterProduct[0].hour_price}</td>
@@ -371,8 +365,8 @@ const Specification = () => {
                     <div className="row mt-2" style={{ justifyContent: "center" }}>
                         <div className="col-lg-2 col-6">
                             <div class="card" style={{ width: "10rem", border: 'none', padding: '2rem' }}>
-                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0].icon1}`} class="card-img-top" alt="..." height="80px" width="80px" />
-                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0].icon1Title}</h5>
+                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0]?.icon1}`} class="card-img-top" alt="..." height="80px" width="80px" />
+                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0]?.icon1Title}</h5>
                                 <div class="card-body" style={{ padding: "0" }}>
                                     <p class="card-title text-center m-0">{filterProduct.length === 0 ? <span>Key</span> : filterProduct[0].minImage5}</p>
 
@@ -381,8 +375,8 @@ const Specification = () => {
                         </div>
                         <div className="col-lg-2 col-6">
                             <div class="card" style={{ width: "10rem", border: 'none', padding: '2rem' }}>
-                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0].icon2}`} class="card-img-top" alt="..." height="80px" width="80px" />
-                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0].icon2Title}</h5>
+                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0]?.icon2}`} class="card-img-top" alt="..." height="80px" width="80px" />
+                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0]?.icon2Title}</h5>
                                 <div class="card-body m-0" style={{ padding: "0" }}>
                                     <p class="card-title text-center m-0">{filterProduct.length === 0 ? <span>Key</span> : filterProduct[0].minImage6}</p>
                                 </div>
@@ -390,8 +384,8 @@ const Specification = () => {
                         </div>
                         <div className="col-lg-2 col-6">
                             <div class="card" style={{ width: "10rem", border: 'none', padding: '2rem' }}>
-                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0].icon3}`} class="card-img-top" alt="..." height="80px" width="80px" />
-                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0].icon3Title}</h5>
+                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0]?.icon3}`} class="card-img-top" alt="..." height="80px" width="80px" />
+                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0]?.icon3Title}</h5>
                                 <div class="card-body m-0" style={{ padding: "0" }}>
                                     <p class="card-title text-center m-0">{filterProduct.length === 0 ? <span>Key</span> : filterProduct[0].minImage7}</p>
                                 </div>
@@ -399,8 +393,8 @@ const Specification = () => {
                         </div>
                         <div className="col-lg-2 col-6">
                             <div class="card" style={{ width: "10rem", border: 'none', padding: '2rem' }}>
-                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0].icon4}`} class="card-img-top" alt="..." height="80px" width="80px" />
-                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0].icon4Title}</h5>
+                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0]?.icon4}`} class="card-img-top" alt="..." height="80px" width="80px" />
+                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0]?.icon4Title}</h5>
                                 <div class="card-body m-0" style={{ padding: "0" }}>
                                     <p class="card-title text-center m-0">{filterProduct.length === 0 ? <span>Key</span> : filterProduct[0].minImage8}</p>
                                 </div>
@@ -408,8 +402,8 @@ const Specification = () => {
                         </div>
                         <div className="col-lg-2 col-6">
                             <div class="card" style={{ width: "10rem", border: 'none', padding: '2rem' }}>
-                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0].icon5}`} class="card-img-top" alt="..." height="80px" width="80px" />
-                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0].icon5Title}</h5>
+                                <img src={`${process.env.REACT_APP_IPURL}${filterCategory[0]?.icon5}`} class="card-img-top" alt="..." height="80px" width="80px" />
+                                <h5 class="card-text text-center" style={{ marginTop: "10px" }}>{filterCategory[0]?.icon5Title}</h5>
                                 <div class="card-body m-0" style={{ padding: "0" }}>
                                     <p class="card-title text-center m-0">{filterProduct.length === 0 ? <span>Key</span> : filterProduct[0].minImage9}</p>
                                 </div>
@@ -447,7 +441,7 @@ const Specification = () => {
             <div className='row m-0 '>
                 <div className="col-10 mx-auto">
                     <h2 className="text-center">Review</h2>
-                    <ReviewScreen product={filterProduct[0].id} />
+                    <ReviewScreen product={filterProduct[0]?.id} />
                 </div>
             </div>
 
@@ -467,8 +461,8 @@ const Specification = () => {
 
                             {/* Google Map Box */}
 
-                            {filterProduct[0].lat ? <><GoogleMap
-                                center={{ lat: parseFloat(filterProduct[0].lat), lng: parseFloat(filterProduct[0].log) }}
+                            {filterProduct[0]?.lat ? <><GoogleMap
+                                center={{ lat: parseFloat(filterProduct[0]?.lat), lng: parseFloat(filterProduct[0]?.log) }}
                                 zoom={15}
                                 mapContainerStyle={{ width: '100%', height: '85%' }}
                                 options={{
@@ -479,10 +473,10 @@ const Specification = () => {
                                 }}
                                 onLoad={map => setMap(map)}
                             >
-                                {map && <Marker position={{ lat: parseFloat(filterProduct[0].lat), lng: parseFloat(filterProduct[0].log) }} />}
+                                {map && <Marker position={{ lat: parseFloat(filterProduct[0]?.lat), lng: parseFloat(filterProduct[0]?.log) }} />}
                             </GoogleMap>
                                 <div className="d-flex mt-4 justify-content-center">
-                                    <a class="" target='_blank' href={`https://www.google.com/maps/search/?api=1&query=${filterProduct[0].lat},${filterProduct[0].log}`}>
+                                    <a class="" target='_blank' href={`https://www.google.com/maps/search/?api=1&query=${filterProduct[0]?.lat},${filterProduct[0]?.log}`}>
                                         <button class="glow-on-hover" type="button">Get location</button></a>
                                 </div>
                             </> : <h4>Location Not Found</h4>}

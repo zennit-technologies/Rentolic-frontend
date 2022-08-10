@@ -96,12 +96,6 @@ const PostAdComponents = () => {
     }
 
 
-
-
-
-    // console.log(fullName)
-    // console.log(id)
-
     const { citys } = useSelector(state => state.cityData);
     useEffect(() => {
         dispatch(loadCitys());
@@ -198,8 +192,6 @@ const PostAdComponents = () => {
     const onChangeHandler = (e) => {
         let { name, value } = e.target;
         setState({ ...state, [name]: value });
-        console.log(state)
-        console.log(fieldFilter)
     };
 
 
@@ -211,16 +203,12 @@ const PostAdComponents = () => {
                 return val.id == state.category_id;
             })
             setSubCatFilter(subCategoryes.filter((cur) => cur.category_id == state.category_id));
-            // setSubCatFilter(tempCatFilter);
-            // console.log(tempCatFilter)
             if (tempCatFilter[0].form_field !== null) {
 
                 setFieldFilter(JSON.parse(tempCatFilter[0].form_field));
                 setFaqFieldFilter(JSON.parse(tempCatFilter[0].faq_field));
                 setIconFieldFilter(tempCatFilter[0]);
                 setFullFieldFilter(JSON.parse(tempCatFilter[0].full_field));
-
-                console.log("Helllo World", iconFieldFilter)
             }
             else {
 
@@ -263,7 +251,6 @@ const PostAdComponents = () => {
     // FILLED ERROR
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(location)
         state.lat = location.lat;
         state.log = location.lng;
 
@@ -304,7 +291,7 @@ const PostAdComponents = () => {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Fill Description !", });
         }
-        else if (!images && !state.minImage1 && !state.minImage2 && !state.minImage3 && !state.minImage4) {
+        else if (!images || !state.minImage1 || !state.minImage2 || !state.minImage3 || !state.minImage4) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Upload All Images !", });
         }
@@ -336,7 +323,6 @@ const PostAdComponents = () => {
             // This code is used for file upload
             axios.post(`${process.env.REACT_APP_IPURL}/admin/product`, formData, config)
                 .then(response => {
-                    console.log(response);
                     state.images = response.data.image;
                     state.minImage1 = response.data.image1;
                     state.minImage2 = response.data.image2;
@@ -455,45 +441,46 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Hour)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" step="1" className="form-control" name="hour_price" value={state.hour_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Hour)" onWheel={(e) => e.target.blur()} />
+                                        <input type="number" step=".01" className="form-control" name="hour_price" value={state.hour_price} onChange={onChangeHandler} placeholder="Product Amount (Hour)" onWheel={(e) => e.target.blur()}                                                                 onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}
+/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Days)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" step={1} name="day_price" value={state.day_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Days)" onWheel={(e) => e.target.blur()} />
+                                        <input type="number" min="0" step="0.01" className="form-control" name="day_price" value={state.day_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Days)" onWheel={(e) => e.target.blur()}  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Month)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" step={1} name="month_price" value={state.month_price} maxLength={7}  onChange={onChangeHandler} placeholder="Product Amount (Month)" onWheel={(e) => e.target.blur()} />
+                                        <input type="number" step="0.01" min="0" className="form-control"  name="month_price" value={state.month_price} onChange={onChangeHandler} placeholder="Product Amount (Month)" onWheel={(e) => e.target.blur()}  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Quarterly)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" step={1} name="threemonth_price" value={state.threemonth_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Quarterly)" onWheel={(e) => e.target.blur()} />
+                                        <input type="number" min="0" className="form-control" step="0.01" name="threemonth_price" value={state.threemonth_price} maxLength={7} onChange={onChangeHandler} placeholder="Product Amount (Quarterly)" onWheel={(e) => e.target.blur()}  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Product Amount (Yearly)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" step={1} name="yearly_price" value={state.yearly_price} maxLength={8} onChange={onChangeHandler} placeholder="Product Amount (Yearly)" onWheel={(e) => e.target.blur()} />
+                                        <input type="number" min="0" step="0.01" className="form-control" name="yearly_price" value={state.yearly_price} maxLength={8} onChange={onChangeHandler} placeholder="Product Amount (Yearly)" onWheel={(e) => e.target.blur()}  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Discount (%)</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" name="discount" value={state.discount} maxLength={2} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Discount' max="2" />
+                                        <input type="number" min="0" className="form-control" name="discount" value={state.discount} maxLength={2} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Discount' max="2" step="0.01"  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label">Security Deposit</label>
                                     <div className="col-sm-9">
-                                        <input type="phone" className="form-control" name="security_deposit" value={state.security_deposit} maxLength={8} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Security Deposit' min="0" />
+                                        <input type="number" className="form-control" name="security_deposit" value={state.security_deposit} maxLength={8} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} placeholder='Security Deposit' step="0.01"  onKeyPress={(e) => { if (e.target.value.length >= 7) e.preventDefault() }}/>
                                     </div>
                                 </div>
 
@@ -555,7 +542,8 @@ const PostAdComponents = () => {
                                 <div className="form-group row">
                                     <label className="col-sm-3 col-form-label" htmlFor="exampleInputEmail1">Phone Number <span className='red'>*</span></label>
                                     <div className="col-sm-9">
-                                        <input type="phone" min="0" className="form-control" name="seller_mobile" placeholder='Phone Number' maxLength={10} value={state.seller_mobile} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} />
+                                        <input type="number" className="form-control" name="seller_mobile" placeholder='Phone Number' maxLength={10} value={state.seller_mobile} onChange={onChangeHandler} onWheel={(e) => e.target.blur()} onKeyPress={(e) => { if (e.target.value.length >= 10) e.preventDefault() }}
+                                        />
                                     </div>
                                 </div>
 
