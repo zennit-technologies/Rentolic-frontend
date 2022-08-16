@@ -96,7 +96,7 @@ const Otp = ({ result, user, phone }) => {
                         return (
                             <input
                                 className="otp-field"
-                                type="text"
+                                type="number"
                                 name="otp"
                                 maxLength="1"
                                 key={index}

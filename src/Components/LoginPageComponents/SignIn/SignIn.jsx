@@ -71,7 +71,6 @@ const SignIn = () => {
 
     const getOtp = async (e) => {
         e.preventDefault();
-        console.log(data.phone)
         try {
             const response = await setUpRecaptha(data.phone);
             setResult(response);
@@ -85,7 +84,6 @@ const SignIn = () => {
 
     const getOtp2 = async (e) => {
         e.preventDefault();
-        console.log(state.phone)
         try {
             const response = await setUpRecaptha(state.phone);
             setResult2(response);
@@ -101,7 +99,8 @@ const SignIn = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setError("");
-        if (!data.phone || data.phone.length < 13 || data.phone.length > 13) {
+        const phoneFormat = /^[6-9]\d{9}$/;
+        if (!data.phone || !data.phone.toString().match(phoneFormat)) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Valid Phone !", });
         }
@@ -114,7 +113,7 @@ const SignIn = () => {
         //     setAlert({ sev: "error", content: "Please Enter Accept terms and condition !", });
         // }
         else {
-
+            data.phone = `+91${data.phone}`;
             axios.post(`${process.env.REACT_APP_IPURL}/api/admin/login`, data)
                 .then((res) => {
                     setUser({ id: res.data.id, fullName: res.data.fullName, login: true, phone: res.data.phone, token: res.data.token });
@@ -127,6 +126,7 @@ const SignIn = () => {
                 .catch((error) => {
                     setOpen(true);
                     setAlert({ sev: "error", content: error.response.data.msg, });
+                    data.phone = data.phone.slice(3);
                 })
         }
     };
@@ -134,21 +134,21 @@ const SignIn = () => {
     const onChangeHandler = (e) => {
         let { name, value } = e.target;
         setState({ ...state, [name]: value })
-        console.log(state)
     }
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        console.log(state)
+        const mailFormat = (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        const phoneFormat = /^[6-9]\d{9}$/;
         if (!state.fullName) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Full Name !", });
         }
-        else if (!state.email) {
+        else if (!state.email || !state.email.match(mailFormat)) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Email Address !", });
         }
-        else if (!state.phone || state.phone.length < 13 || state.phone.length > 13) {
+        else if (!state.phone || state.phone.length < 10 || state.phone.length > 10 || !state.phone.toString().match(phoneFormat)) {
             setOpen(true);
             setAlert({ sev: "error", content: "Please Enter Valid Phone !", });
         }
@@ -169,33 +169,22 @@ const SignIn = () => {
             setAlert({ sev: "error", content: "Password Does Not Match !", });
         }
         else {
+            state.phone = `+91${state.phone}`;
             let filterUser = users.filter((val) => { return val.phone === state.phone })
-            console.log(filterUser.length)
-            console.log(users)
             if (filterUser.length !== 0) {
                 setOpen(true);
                 setAlert({ sev: "error", content: "This Mobile Number is already registered !", });
+
+                state.phone = state.phone.slice(3);
+
+
             }
             else {
                 getOtp2(e);
             }
 
-
         }
     }
-
-    const handleGoogleSignIn = async (e) => {
-        e.preventDefault();
-        try {
-            const respo = await googleSignIn();
-            console.log("respone", respo)
-            localStorage.setItem("fullname", respo.user.displayName);
-            window.location.reload(false);
-            navigate('/');
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
 
     // Cancel Snackbar
     const handleClose = (event, reason) => {
@@ -229,12 +218,18 @@ const SignIn = () => {
                                                         <div className="form-group">
                                                             <label htmlFor="exampleInputEmail1">Phone Number </label>
                                                             <input
-                                                                type="phone"
+                                                                type="number"
                                                                 className="form-control email"
                                                                 name="phonenum"
                                                                 placeholder="Phone Number"
+
+                                                                // value={data.phone}
+                                                                onChange={(e) => setData({ ...data, phone: e.target.value })}
+                                                                onKeyPress={(e) => { if (e.target.value.length >= 10) e.preventDefault() }}
+
                                                                 maxLength={10}
                                                                 onChange={(e) => setData({ ...data, phone: `+91${e.target.value}` })}
+
                                                             />
                                                         </div>
                                                         <div className="form-group">
@@ -254,9 +249,9 @@ const SignIn = () => {
                                                         {/* <!-- start remember-row --> */}
                                                         <div className="row remember-row">
                                                             <div className="col-xs-6 col-sm-6">
-                                                                <label className="checkbox text-left">
-                                                                    <input type="checkbox" value="remember-me" />
-                                                                    <span className="label-text">Remember me</span>
+                                                                <label className="text-left">
+                                                                    <input type="checkbox" />
+                                                                    <span className="label-text ml-1">Remember me</span>
                                                                 </label>
                                                             </div>
                                                             <div className="col-xs-6 col-sm-6">
@@ -279,6 +274,14 @@ const SignIn = () => {
                                                         </div> */}
                                                         {/* <!-- ./remember-row --> */}
                                                         <div className="form-group">
+
+                                                            <button
+                                                                className="btn btn-lg btn-primary"
+                                                                type="button"
+                                                                onClick={handleSubmit}
+                                                            >SIGN IN</button>
+
+
                                                             <Stack spacing={2} sx={{ width: '100%' }} id="stack" className="form-group">
                                                                 <button
                                                                     className="btn btn-lg btn-primary"
@@ -326,13 +329,19 @@ const SignIn = () => {
                                                             <div className="form-group">
                                                                 <label htmlFor="exampleInputEmail1">Phone Number</label>
                                                                 <input
-                                                                    type="text"
+                                                                    type="number"
                                                                     className="form-control email"
                                                                     name="phone"
                                                                     placeholder="Phone Number"
                                                                     // value={state.phone}
+
+                                                                    onChange={(e) => setState({ ...state, phone: e.target.value })}
+                                                                    onKeyPress={(e) => { if (e.target.value.length >= 10) e.preventDefault() }}
+
+
                                                                     maxLength={10}
                                                                     onChange={(e) => setState({ ...state, phone: `+91${e.target.value}` })}
+
                                                                 />
                                                             </div>
                                                             <div className="form-group">
@@ -381,14 +390,27 @@ const SignIn = () => {
                                                                         onChange={(e) => setConfirm(e.target.value)}
                                                                     />
                                                                     {/* <!-- <span className="fa fa-eye-slash pwd-toggle"></span> --> */}
+
+                                                                    <div id="recaptcha-container">
+                                                                        <input type="checkbox" name="tnc" onClick={() => setState({ ...state, tnc: !state.tnc })} />
+
                                                                     {/* <div id="recaptcha-container">
                                                                         <input type="checkbox" name="tnc" requried
                                                                         onClick={() => setState({ ...state, tnc: !state.tnc })} 
                                                                         />
+
                                                                         &nbsp;Agree to <Link to="/">Terms and Conditions</Link>
                                                                     </div> */}
 
                                                                     <div className="form-group">
+
+                                                                        <button to=""
+                                                                            className="btn btn-lg btn-primary btn-block"
+                                                                            type="button"
+                                                                            onClick={handleRegister}
+                                                                        >SIGN UP</button>
+
+
                                                                         <Stack spacing={2} sx={{ width: '100%' }} id="stack" >
                                                                             <button to=""
                                                                                 className="btn btn-lg btn-primary btn-block"
@@ -403,6 +425,7 @@ const SignIn = () => {
                                                                                 </Alert>
                                                                             </Snackbar>
                                                                         </Stack>
+
 
 
                                                                         <div
@@ -506,6 +529,15 @@ const SignIn = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <Stack spacing={2} sx={{ width: '100%' }} id="stack" className="form-group">
+                            {/* Snackbar */}
+                            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1500} onClose={handleClose}>
+                                <Alert onClose={handleClose} severity={alert.sev} sx={{ width: '100%' }}>
+                                    {alert.content}
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
                         {/* <!-- ./row --> */}
                     </div>
                     </>
